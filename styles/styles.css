@@ -1,0 +1,28 @@
+#name,#number
+{
+	background-color:#2190cf;
+	color: white;
+	width: 50%;
+	font-size: 25px;
+	font-weight: bold;
+}
+#success
+{
+	background-color: rgb(88,185,74);
+	color: rgb(44,78,50);
+	width:25%;
+	height:auto;
+	font-size: 50px;
+	padding-left: 5px;
+	border-radius: 5px;
+}
+#fail
+{
+background-color: rgb(233,148,239);
+	color: rgb(188,55,48);
+	width:25%;
+	height:auto;
+	font-size: 50px;	
+	padding-left: 5px;
+	border-radius: 5px;
+}

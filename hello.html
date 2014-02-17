@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+<head>
+<script src="script/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("#hello").click(function(){
+  	var searchf={
+      name:$('#dirname').val()
+    };
+   if(searchf.name=="") 
+    alert("Empty fields")
+  else
+   $.ajax({
+   	url:'tryajax.php',
+    method:'POST',
+    data:searchf,
+   	success:function(data)
+   	{
+   		console.log('insidr');
+      trapped=$.parseJSON(data);
+      console.log(trapped);
+      if(trapped.id==null)
+        alert("No entry found");
+   		$("#name").html(trapped.name);
+   		$("#number").html(trapped.number);
+      
+   	}
+  
+   });
+  });
+$('#addentry').click(function(){
+    var newdetails={
+      name:$('#newname').val(),
+      number:$('#newnum').val()
+    };
+    console.log(newdetails);
+    $.ajax(
+    {
+      url:'addnew.php',
+      method:'POST',
+      data:newdetails,
+      success:function(data){
+       console.log(data);
+       response=$.parseJSON(data);
+       if(response.status==1)
+           $('#success').html('Success');
+      else if(response.status==0)
+          $('#fail').html('Fail');  
+      }
+    });
+});
+});
+</script>
+</head>
+<body>
+
+<div id="searchfields">
+  <label for="dirname">Name of the person</label><input type="text" name="dirname" id="dirname" size=15/>
+
+<button id="hello">Get details</button>
+</div>
+<br>
+<div id="name"></div>
+<div id="number"></div>
+<div id="addnew">
+  <label for="newname">Name</label><input type="text" name="newname" id="newname" size="25"/><br>
+  <label for="newnum">Number</label><input type="text" name="newnum" id="newnum" size="25"/><br>
+  <button id="addentry">Add new Entry</button>
+</div>
+<div id="success"></div>
+<div id="fail"></div>
+</body>
+</html>
